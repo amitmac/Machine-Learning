@@ -1,10 +1,11 @@
-function class = naiveBayesClassifier(train,test)
+function class = gaussianBayesClassifier(train,test)
     [m,n] = size(train);
     X = train(:,1:n-1);
     Y = train(:,n);
     
     % Segment the data according to target/class and process
     uniqueY = unique(Y);
+    test = test(:,1:n-1);
     class = zeros(size(test));
     for i = 1:length(uniqueY)
         d = X(uniqueY(i) == train(:,n));
