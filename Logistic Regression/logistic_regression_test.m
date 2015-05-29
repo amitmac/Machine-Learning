@@ -4,9 +4,9 @@ function [trainError,testError] = logistic_regression_test(trainX,trainY,testX,t
     testX = [ones(size(testX,1),1),testX];
     
     calctrainY = sigmoid(trainX * theta) >= 0.5;
-	trainError = sum((calctrainY - trainY).^2) / length(trainX);
+	trainError = sum(abs(calctrainY - trainY)) / length(trainX);
     
     calctestY = sigmoid(testX * theta) >= 0.5;
-	testError = sum((calctestY - testY).^2) / length(testX);
+	testError = sum(abs(calctestY - testY)) / length(testX);
     
 end

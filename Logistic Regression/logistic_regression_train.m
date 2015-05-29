@@ -1,14 +1,15 @@
-function theta = logistic_regression_train(X,y,alpha,num_iter)
+function [theta,cost] = logistic_regression_train(X,y,num_iter)
 	
-	X = featureNorm(X);
+	%X = featureNorm(X);
     [m,n] = size(X);
     X = [ones(m,1), X];
-    theta = zeros(n+1,1);
-	
+    theta = ones(n+1,1);
+	cost = zeros(1,500);
     for i=1:num_iter
-        alpha = alpha/i;
-        h = sigmoid(X * w);
-        theta = theta + alpha * X' * (h - y);
+        alpha = 1/sqrt(i); %try changing different values like 1/sqrt(i),2/i...
+        h = sigmoid(X * theta);
+        theta = theta - alpha * X' * (h - y);
+        cost(i) = sum(abs(h - y)) / m;
     end
 
 end
