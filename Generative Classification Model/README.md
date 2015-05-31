@@ -26,6 +26,12 @@ We take the discriminant function as the log posterior probability
 	For a gaussian pdf,
 	
 		log(P(c|x)) = 
-			(-1/2)(x - mu)' * inverse(sigma) * (x - mu) - (1/2) + log(inverse(sigma)) + log(P(c))
+			(-1/2)(x - mu)' * inverse(sigma) * (x - mu) - (1/2)*log(inverse(sigma)) + log(P(c))
 
 After calculating parameters, just put them into the above equation for each class and compare to predict the class.
+
+OR
+
+log(P(c|x)) = log(N(mu,sigma)) + log(P(c))
+
+In matlab, for normal density, we can calculate P(x|c) using mvnpdf function and then taking log and adding log of prior.
