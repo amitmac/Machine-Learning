@@ -32,4 +32,6 @@ After calculating parameters, just put them into the above equation for each cla
 
 OR
 
+log(P(c|x)) = log(N(mu,sigma)) + log(P(c))
+
 In matlab, for normal density, we can calculate P(x|c) using mvnpdf function and then taking log and adding log of prior.
