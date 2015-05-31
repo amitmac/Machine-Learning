@@ -29,3 +29,7 @@ We take the discriminant function as the log posterior probability
 			(-1/2)(x - mu)' * inverse(sigma) * (x - mu) - (1/2)*log(inverse(sigma)) + log(P(c))
 
 After calculating parameters, just put them into the above equation for each class and compare to predict the class.
+
+OR
+
+In matlab, for normal density, we can calculate P(x|c) using mvnpdf function and then taking log and adding log of prior.
