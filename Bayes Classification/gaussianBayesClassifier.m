@@ -1,27 +1,17 @@
-function [class,params] = gaussianBayesClassifier(train,test)
-    [m,n] = size(train);
+function params = gaussianBayesClassifier(train)
+    n = size(train,2);
     X = train(:,1:n-1);
     Y = train(:,n);
     
     % Segment the data according to target/class and process
     uniqueY = unique(Y);
-    test = test(:,1:n-1);
-    class = zeros(size(test,1),1);
-    mu = [];
-    vars = [];
+    mu = zeros(length(uniqueY),size(X,2));
+    sd = zeros(length(uniqueY),size(X,2));
+    
     for i = 1:length(uniqueY)
-        d = X(uniqueY(i) == train(:,n),:);
-        mu(i) = mean(d);
-        vars(i) = var(d);
-        likelihood = zeros(size(test));
-        for j = 1:length(test)
-            % Suppose likelihood is given by normal distribution
-            likelihood(i,:) = normpdf(test(i,:),mu(i),vars(i));
-        end
-        plikelihood = prod(likelihood,2);
-        prior = length(d)/m;
-        
-        class(plikelihood*prior > class) = uniqueY(i);
+        d = X(uniqueY(i) == Y,:);
+        mu(i,:) = mean(d);
+        sd(i,:) = std(d);
     end
-    params = {mu,vars};
+    params = {mu,sd};
 end
